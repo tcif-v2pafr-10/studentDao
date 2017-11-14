@@ -1,9 +1,9 @@
-package pafr.dao.memory;
+package nl.hu.pafr.dao.memory;
 
 import java.util.List;
 
-import pafr.dao.StudentGroupDao;
-import pafr.model.StudentGroup;
+import nl.hu.pafr.dao.StudentGroupDao;
+import nl.hu.pafr.model.StudentGroup;
 
 public class StudentGroupDaoImpl implements StudentGroupDao {
 	private DataStore dataStore;

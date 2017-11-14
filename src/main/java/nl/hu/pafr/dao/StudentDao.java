@@ -1,9 +1,9 @@
-package pafr.dao;
+package nl.hu.pafr.dao;
 
 import java.util.List;
 
-import pafr.model.Student;
-import pafr.model.StudentGroup;
+import nl.hu.pafr.model.Student;
+import nl.hu.pafr.model.StudentGroup;
 
 public interface StudentDao {
 	public List<Student> getAll();

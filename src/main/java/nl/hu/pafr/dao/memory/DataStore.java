@@ -1,10 +1,10 @@
-package pafr.dao.memory;
+package nl.hu.pafr.dao.memory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import pafr.model.Student;
-import pafr.model.StudentGroup;
+import nl.hu.pafr.model.Student;
+import nl.hu.pafr.model.StudentGroup;
 
 public class DataStore {
 	// list is working as a database

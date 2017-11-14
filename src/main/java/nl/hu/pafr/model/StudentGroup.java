@@ -1,4 +1,4 @@
-package pafr.model;
+package nl.hu.pafr.model;
 
 import java.util.ArrayList;
 import java.util.List;

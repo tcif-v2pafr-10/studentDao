@@ -1,4 +1,4 @@
-package pafr.dao.mysql;
+package nl.hu.pafr.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,9 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import pafr.dao.StudentDao;
-import pafr.model.Student;
-import pafr.model.StudentGroup;
+import nl.hu.pafr.dao.StudentDao;
+import nl.hu.pafr.model.Student;
+import nl.hu.pafr.model.StudentGroup;
 
 public class StudentDaoMySQLImpl implements StudentDao {
 
