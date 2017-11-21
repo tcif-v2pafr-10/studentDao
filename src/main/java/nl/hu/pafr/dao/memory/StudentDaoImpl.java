@@ -13,10 +13,8 @@ public class StudentDaoImpl implements StudentDao {
 	}
 
 	public StudentDaoImpl(DataStore dataStore) {
-		super();
 		this.dataStore = dataStore;
 	}
-
 
 	public void delete(Student student) {
 		Student s = get(student.getId());
@@ -62,7 +60,7 @@ public class StudentDaoImpl implements StudentDao {
 
 	public Student getStudentByNumber(String number) {
 		for (Student s : dataStore.getStudents()) {
-			System.out.println(s + " "+ number);
+			System.out.println(s + " " + number);
 			if (s.getNumber().equals(number)) {
 				return s;
 			}
