@@ -53,7 +53,7 @@ public class StudentGroupDaoMySQLImpl implements StudentGroupDao {
 			ResultSet rs = stmt.executeQuery(strQuery);
 			if (rs.next()) {
 				group = new StudentGroup(rs.getInt("id"), rs.getString("name"));
-				List<Student> students = studentDao.getStudentsByGroup(group);
+				List<Student> students = studentDao.getByGroup(group);
 				for (Student s : students){
 					group.addStudent(s);
 				}
@@ -98,7 +98,6 @@ public class StudentGroupDaoMySQLImpl implements StudentGroupDao {
 
 	public void delete(StudentGroup group) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void setStudentDao(StudentDao studentDao) {
@@ -106,7 +105,7 @@ public class StudentGroupDaoMySQLImpl implements StudentGroupDao {
 	}
 
 	@Override
-	public StudentGroup getGroupByCode(String code) {
+	public StudentGroup getByCode(String code) {
 		// TODO Auto-generated method stub
 		return null;
 	}

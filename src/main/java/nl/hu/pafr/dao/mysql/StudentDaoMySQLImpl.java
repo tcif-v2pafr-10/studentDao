@@ -146,7 +146,7 @@ public class StudentDaoMySQLImpl implements StudentDao {
 	}
 
 	@Override
-	public Student getStudentByNumber(String number) {
+	public Student getByNumber(String number) {
 		Student student = null;
 		try {
 			Class.forName(MYSQL_DB_DRIV).newInstance();
@@ -165,6 +165,12 @@ public class StudentDaoMySQLImpl implements StudentDao {
 			e.printStackTrace();
 		}
 		return student;
+	}
+
+	@Override
+	public List<Student> getByGroup(StudentGroup studentGroup) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

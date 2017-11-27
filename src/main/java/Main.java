@@ -45,9 +45,9 @@ public class Main {
 			StudentGroup g1 = groupDao.get(g.getId());
 			System.out.println("StudentGroups 2: "+g1);
 		}
-		StudentGroup group1 = groupDao.getGroupByCode("TICT-SIE-V2A-17");
+		StudentGroup group1 = groupDao.getByCode("TICT-SIE-V2A-17");
 		System.out.println("StudentGroups 3: "+group1);
-		Student student1  = studentDao.getStudentByNumber("1737273");
+		Student student1  = studentDao.getByNumber("1737273");
 		System.out.println("Student: "+ student1);
 	}
 }

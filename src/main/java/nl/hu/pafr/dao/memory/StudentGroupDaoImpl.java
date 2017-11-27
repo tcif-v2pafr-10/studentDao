@@ -62,7 +62,7 @@ public class StudentGroupDaoImpl implements StudentGroupDao {
 	}
 
 	@Override
-	public StudentGroup getGroupByCode(String code) {
+	public StudentGroup getByCode(String code) {
 		for (StudentGroup g : dataStore.getStudentGroups()) {
 			if (g.getCode() == code) {
 				return g;

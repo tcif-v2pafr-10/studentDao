@@ -8,7 +8,7 @@ import nl.hu.pafr.model.StudentGroup;
 public interface StudentDao {
 	public List<Student> getAll();
 
-	public List<Student> getStudentsByGroup(StudentGroup studentGroup);
+	public List<Student> getByGroup(StudentGroup studentGroup);
 
 	public Student get(int id);
 
@@ -18,5 +18,5 @@ public interface StudentDao {
 
 	public void delete(Student student);
 
-	public Student getStudentByNumber(String string);
+	public Student getByNumber(String string);
 }

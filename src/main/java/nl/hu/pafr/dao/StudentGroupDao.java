@@ -15,5 +15,5 @@ public interface StudentGroupDao {
 
 	public void delete(StudentGroup group);
 	
-	public StudentGroup getGroupByCode(String code);
+	public StudentGroup getByCode(String code);
 }

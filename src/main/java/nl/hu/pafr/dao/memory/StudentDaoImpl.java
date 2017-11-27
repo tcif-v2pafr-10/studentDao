@@ -53,12 +53,12 @@ public class StudentDaoImpl implements StudentDao {
 		}
 	}
 
-	public List<Student> getStudentsByGroup(StudentGroup group) {
+	public List<Student> getByGroup(StudentGroup group) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Student getStudentByNumber(String number) {
+	public Student getByNumber(String number) {
 		for (Student s : dataStore.getStudents()) {
 			System.out.println(s + " " + number);
 			if (s.getNumber().equals(number)) {
