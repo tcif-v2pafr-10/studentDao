@@ -1,3 +1,5 @@
+package nl.hu.pafr.client;
+
 import java.util.List;
 import java.util.Random;
 
