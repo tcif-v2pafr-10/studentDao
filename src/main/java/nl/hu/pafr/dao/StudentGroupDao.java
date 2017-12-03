@@ -1,19 +1,7 @@
 package nl.hu.pafr.dao;
 
-import java.util.List;
-
 import nl.hu.pafr.model.StudentGroup;
 
-public interface StudentGroupDao {
-	public List<StudentGroup> getAll();
-
-	public StudentGroup get(int id);
-
-	public void update(StudentGroup group);
-
-	public void insert(StudentGroup group);
-
-	public void delete(StudentGroup group);
-	
+public interface StudentGroupDao extends GenericDao<StudentGroup> {
 	public StudentGroup getByCode(String code);
 }
