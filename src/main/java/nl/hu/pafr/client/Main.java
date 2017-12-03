@@ -18,7 +18,8 @@ public class Main {
 	
 	public static void main(String[] args) {
 		StudentDao studentDao = new StudentDaoJdbcImpl();
-		StudentGroupDao groupDao = new StudentGroupDaoJdbcImpl();
+		StudentGroupDao groupDao = new StudentGroupDaoJdbcImpl(studentDao);
+
 		/*
 		 * Aanmaken van de domein objecten
 		 */
@@ -30,23 +31,25 @@ public class Main {
 
 		/*
 		 * Opslaan van de data in de domein objecten
+		 * Wie is verantwoordelijk voor het opslaan van de studenten binnen de groep?
 		 */
 		groupDao.insert(group);
-		for (Student student : group.getStudents()) {
-			studentDao.insert(student);
-		}
+//		for (Student student : group.getStudents()) {
+//			studentDao.insert(student);
+//		}
 		
 		/*
 		 * Queries op de domein objecten
 		 */
 		List<StudentGroup> groups = groupDao.getAll();
 		for (StudentGroup g : groups) {
-			System.out.println("StudentGroups 1: "+g);
-			StudentGroup g1 = groupDao.get(g.getId());
-			System.out.println("StudentGroups 2: "+g1);
+			/*
+			 * Wie is verantwoordelijk voor het ophalen van de studenten binnen de groep?
+			 */
+			System.out.println("StudentGroups: "+g);
 		}
-		StudentGroup group1 = groupDao.getByCode("TICT-SIE-V2A-17");
-		System.out.println("StudentGroups 3: "+group1);
+		StudentGroup groupByCode = groupDao.getByCode("TICT-SIE-V2A-17");
+		System.out.println("StudentGroup: "+groupByCode);
 		Student student1  = studentDao.getByNumber("1737273");
 		System.out.println("Student: "+ student1);
 	}

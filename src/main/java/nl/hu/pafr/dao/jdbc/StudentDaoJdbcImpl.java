@@ -1,7 +1,6 @@
 package nl.hu.pafr.dao.jdbc;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -11,19 +10,12 @@ import nl.hu.pafr.dao.StudentDao;
 import nl.hu.pafr.model.Student;
 import nl.hu.pafr.model.StudentGroup;
 
-public class StudentDaoJdbcImpl implements StudentDao {
-
-	private static final String MYSQL_DB_DRIV = "com.mysql.jdbc.Driver";
-	private static final String MYSQL_DB_CONN = "jdbc:mysql://localhost/pafr";
-	private static final String MYSQL_DB_USER = "root";
-	private static final String MYSQL_DB_PASS = "";
+public class StudentDaoJdbcImpl extends AbstractDaoJdbcImpl implements StudentDao {
 
 	public List<Student> getAll() {
 		List<Student> students = new ArrayList<Student>();
 		try {
-			Class.forName(MYSQL_DB_DRIV).newInstance();
-			Connection con = DriverManager.getConnection(MYSQL_DB_CONN,
-					MYSQL_DB_USER, MYSQL_DB_PASS);
+			Connection con = open();
 			Statement stmt = con.createStatement();
 			String strQuery = "select * from student order by number";
 			ResultSet rs = stmt.executeQuery(strQuery);
@@ -32,20 +24,18 @@ public class StudentDaoJdbcImpl implements StudentDao {
 				students.add(s);
 			}
 			stmt.close();
-			con.close();
+			close(con);
 		} catch (Exception e) {
 			System.out.println("Cannot retrieve: " + e.getMessage());
 			e.printStackTrace();
 		}
 		return students;
 	}
-
-	public List<Student> getStudentsByGroup(StudentGroup group) {
+	@Override
+	public List<Student> getByGroup(StudentGroup group) {
 		List<Student> students = new ArrayList<Student>();
 		try {
-			Class.forName(MYSQL_DB_DRIV).newInstance();
-			Connection con = DriverManager.getConnection(MYSQL_DB_CONN,
-					MYSQL_DB_USER, MYSQL_DB_PASS);
+			Connection con = open();
 			Statement stmt = con.createStatement();
 			String strQuery = "select * from student where student_group_id = "+group.getId()+" order by number";
 			ResultSet rs = stmt.executeQuery(strQuery);
@@ -65,9 +55,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 	public Student get(int id) {
 		Student student = null;
 		try {
-			Class.forName(MYSQL_DB_DRIV).newInstance();
-			Connection con = DriverManager.getConnection(MYSQL_DB_CONN,
-					MYSQL_DB_USER, MYSQL_DB_PASS);
+			Connection con = open();
 			Statement stmt = con.createStatement();
 			String strQuery = "select * from student where id = " + id;
 			ResultSet rs = stmt.executeQuery(strQuery);
@@ -85,9 +73,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 
 	public void update(Student student) {
 		try {
-			Class.forName(MYSQL_DB_DRIV).newInstance();
-			Connection con = DriverManager.getConnection(MYSQL_DB_CONN,
-					MYSQL_DB_USER, MYSQL_DB_PASS);
+			Connection con = open();
 			Statement stmt = con.createStatement();
 
 			// create a SQL query
@@ -104,13 +90,11 @@ public class StudentDaoJdbcImpl implements StudentDao {
 
 	public void insert(Student student) {
 		try {
-			Class.forName(MYSQL_DB_DRIV).newInstance();
-			Connection con = DriverManager.getConnection(MYSQL_DB_CONN,
-					MYSQL_DB_USER, MYSQL_DB_PASS);
+			Connection con = open();
 			Statement stmt = con.createStatement();
 			System.out.println("insertStudent: "+student);
 			// create a SQL query
-			String strQuery = "INSERT INTO student " + " (id, number, name, email, group_id) "
+			String strQuery = "INSERT INTO student " + " (id, number, name, email, student_group_id) "
 					+ " VALUES (" + (student.getId()) + "," 
 					+ " '" + student.getNumber() + "'," 
 					+ " '" + student.getName() + "', "
@@ -127,9 +111,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 
 	public void delete(Student student) {
 		try {
-			Class.forName(MYSQL_DB_DRIV).newInstance();
-			Connection con = DriverManager.getConnection(MYSQL_DB_CONN,
-					MYSQL_DB_USER, MYSQL_DB_PASS);
+			Connection con = open();
 			Statement stmt = con.createStatement();
 
 			
@@ -151,9 +133,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 	public Student getByNumber(String number) {
 		Student student = null;
 		try {
-			Class.forName(MYSQL_DB_DRIV).newInstance();
-			Connection con = DriverManager.getConnection(MYSQL_DB_CONN,
-					MYSQL_DB_USER, MYSQL_DB_PASS);
+			Connection con = open();
 			Statement stmt = con.createStatement();
 			String strQuery = "select * from student where number = '" + number+"'";
 			ResultSet rs = stmt.executeQuery(strQuery);
@@ -167,12 +147,6 @@ public class StudentDaoJdbcImpl implements StudentDao {
 			e.printStackTrace();
 		}
 		return student;
-	}
-
-	@Override
-	public List<Student> getByGroup(StudentGroup studentGroup) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
