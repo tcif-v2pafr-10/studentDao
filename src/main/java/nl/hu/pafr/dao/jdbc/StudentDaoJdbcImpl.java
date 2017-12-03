@@ -1,4 +1,4 @@
-package nl.hu.pafr.dao.mysql;
+package nl.hu.pafr.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +9,7 @@ import java.util.List;
 
 import nl.hu.pafr.dao.StudentDao;
 import nl.hu.pafr.model.Student;
+import nl.hu.pafr.model.StudentGroup;
 
 public class StudentDaoJdbcImpl implements StudentDao {
 
@@ -27,7 +28,29 @@ public class StudentDaoJdbcImpl implements StudentDao {
 			String strQuery = "select * from student order by number";
 			ResultSet rs = stmt.executeQuery(strQuery);
 			while (rs.next()) {
-				Student s = new Student(rs.getInt("id"), rs.getString("number"), rs.getString("name"), rs.getString("email"));
+				Student s = new Student(rs.getInt("id"), rs.getString("number"), rs.getString("name"), rs.getString("email"), null);
+				students.add(s);
+			}
+			stmt.close();
+			con.close();
+		} catch (Exception e) {
+			System.out.println("Cannot retrieve: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return students;
+	}
+
+	public List<Student> getStudentsByGroup(StudentGroup group) {
+		List<Student> students = new ArrayList<Student>();
+		try {
+			Class.forName(MYSQL_DB_DRIV).newInstance();
+			Connection con = DriverManager.getConnection(MYSQL_DB_CONN,
+					MYSQL_DB_USER, MYSQL_DB_PASS);
+			Statement stmt = con.createStatement();
+			String strQuery = "select * from student where student_group_id = "+group.getId()+" order by number";
+			ResultSet rs = stmt.executeQuery(strQuery);
+			while (rs.next()) {
+				Student s = new Student(rs.getInt("id"), rs.getString("number"), rs.getString("name"), rs.getString("email"), group);
 				students.add(s);
 			}
 			stmt.close();
@@ -49,7 +72,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 			String strQuery = "select * from student where id = " + id;
 			ResultSet rs = stmt.executeQuery(strQuery);
 			if (rs.next()) {
-				student = new Student(rs.getInt("id"), rs.getString("number"), rs.getString("name"), rs.getString("email"));
+				student = new Student(rs.getInt("id"), rs.getString("number"), rs.getString("name"), rs.getString("email"), null);
 			}
 			stmt.close();
 			con.close();
@@ -87,11 +110,12 @@ public class StudentDaoJdbcImpl implements StudentDao {
 			Statement stmt = con.createStatement();
 			System.out.println("insertStudent: "+student);
 			// create a SQL query
-			String strQuery = "INSERT INTO student " + " (id, number, name, email) "
+			String strQuery = "INSERT INTO student " + " (id, number, name, email, group_id) "
 					+ " VALUES (" + (student.getId()) + "," 
 					+ " '" + student.getNumber() + "'," 
-					+ " '" + student.getName() + "',"
-					+ " '"+student.getEmail()+"' ) ";
+					+ " '" + student.getName() + "', "
+					+ " '" + student.getEmail() + "', "
+					+student.getStudentGroup().getId()+" ) ";
 			stmt.executeUpdate(strQuery);
 			stmt.close();
 			con.close();
@@ -134,7 +158,7 @@ public class StudentDaoJdbcImpl implements StudentDao {
 			String strQuery = "select * from student where number = '" + number+"'";
 			ResultSet rs = stmt.executeQuery(strQuery);
 			if (rs.next()) {
-				student = new Student(rs.getInt("id"), rs.getString("number"), rs.getString("name"), rs.getString("email"));
+				student = new Student(rs.getInt("id"), rs.getString("number"), rs.getString("name"), rs.getString("email"), null);
 			}
 			stmt.close();
 			con.close();
@@ -143,6 +167,12 @@ public class StudentDaoJdbcImpl implements StudentDao {
 			e.printStackTrace();
 		}
 		return student;
+	}
+
+	@Override
+	public List<Student> getByGroup(StudentGroup studentGroup) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

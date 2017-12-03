@@ -5,16 +5,18 @@ public class Student {
 	private String number;
 	private String name;
 	private String email;
+	private StudentGroup studentGroup;
 
 	public Student() {
 	};
 
-	public Student(int id, String name, String number, String email) {
+	public Student(int id, String name, String number, String email, StudentGroup studentGroup) {
 		super();
 		this.id = id;
 		this.number = number;
 		this.name = name;
 		this.email = email;
+		this.setStudentGroup(studentGroup);
 	}
 
 	public int getId() {
@@ -41,6 +43,14 @@ public class Student {
 		this.name = name;
 	}
 
+	public StudentGroup getStudentGroup() {
+		return studentGroup;
+	}
+
+	public void setStudentGroup(StudentGroup studentGroup) {
+		this.studentGroup = studentGroup;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -51,7 +61,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", number=" + number + ", name=" + name+ ", email=" + email + "]";
+		return "Student [id=" + id + ", number=" + number + ", name=" + name + ", email=" + email + "]";
 	}
 
 }
