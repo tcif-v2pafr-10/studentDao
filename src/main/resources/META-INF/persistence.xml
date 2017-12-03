@@ -1,0 +1,49 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="nl.hu.ict.jpa.oracle">
+		<description>
+            Hibernate using Oracle
+        </description>
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>nl.hu.pafr.model.Student</class>
+		<class>nl.hu.pafr.model.StudentGroup</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:oracle:thin:@ondora02.hu.nl:8521:cursus02" />
+			<property name="javax.persistence.jdbc.user" value="stud1234567" />
+			<property name="javax.persistence.jdbc.password" value="stud1234567" />
+
+			<property name="hibernate.show_sql" value="true" />	<!-- true: shows each SQL -->
+			<property name="hibernate.hbm2ddl.auto" value="create" />  <!-- create: creates database -->
+
+		</properties>
+
+	</persistence-unit>
+
+	<persistence-unit name="nl.hu.ict.jpa.mysql">
+		<description>
+            Hibernate using MySQL
+        </description>
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+<!-- 		<class>nl.hu.pafr.model.Student</class> -->
+<!-- 		<class>nl.hu.pafr.model.StudentGroup</class> -->
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/pafr" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
