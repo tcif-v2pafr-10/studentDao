@@ -4,15 +4,14 @@ import java.util.List;
 
 import nl.hu.pafr.dao.StudentDao;
 import nl.hu.pafr.model.Student;
-import nl.hu.pafr.model.StudentGroup;
 
-public class StudentDaoImpl implements StudentDao {
+public class StudentDaoMemImpl implements StudentDao {
 	private DataStore dataStore;
 
-	public StudentDaoImpl() {
+	public StudentDaoMemImpl() {
 	}
 
-	public StudentDaoImpl(DataStore dataStore) {
+	public StudentDaoMemImpl(DataStore dataStore) {
 		this.dataStore = dataStore;
 	}
 
@@ -51,11 +50,6 @@ public class StudentDaoImpl implements StudentDao {
 		} else {
 			System.out.println("Student already exists.");
 		}
-	}
-
-	public List<Student> getByGroup(StudentGroup group) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Student getByNumber(String number) {

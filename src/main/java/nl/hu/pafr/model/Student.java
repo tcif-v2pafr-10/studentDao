@@ -5,17 +5,16 @@ public class Student {
 	private String number;
 	private String name;
 	private String email;
-	private StudentGroup studentGroup;
 
 	public Student() {
 	};
 
-	public Student(int id, String name, String number, StudentGroup studentGroup) {
+	public Student(int id, String name, String number, String email) {
 		super();
 		this.id = id;
 		this.number = number;
 		this.name = name;
-		this.setStudentGroup(studentGroup);
+		this.email = email;
 	}
 
 	public int getId() {
@@ -40,14 +39,6 @@ public class Student {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public StudentGroup getStudentGroup() {
-		return studentGroup;
-	}
-
-	public void setStudentGroup(StudentGroup studentGroup) {
-		this.studentGroup = studentGroup;
 	}
 
 	public String getEmail() {

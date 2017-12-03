@@ -3,12 +3,9 @@ package nl.hu.pafr.dao;
 import java.util.List;
 
 import nl.hu.pafr.model.Student;
-import nl.hu.pafr.model.StudentGroup;
 
 public interface StudentDao {
 	public List<Student> getAll();
-
-	public List<Student> getByGroup(StudentGroup studentGroup);
 
 	public Student get(int id);
 
