@@ -6,11 +6,33 @@ import javax.persistence.EntityManager;
 
 import nl.hu.pafr.dao.StudentDao;
 import nl.hu.pafr.model.Student;
+import nl.hu.pafr.model.StudentGroup;
 
-public class StudentDaoJpaImpl extends AbstractDaoJpaImpl<Student> implements StudentDao {
+public class StudentDaoJpaImpl extends AbstractDaoJpaImpl implements StudentDao {
+	private EntityManager em = null;
+	public StudentDaoJpaImpl(EntityManager em) {
+		this.em = em;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Student> getAll() {
+		return (List<Student>) em.createQuery("from Student").getResultList();
+	}
 
-	public StudentDaoJpaImpl(EntityManager entityManager) {
-		super(entityManager);
+
+	public Student get(int id) {
+		return em.find(Student.class, id);
+	}
+
+	public void update(Student student) {
+		em.persist(student);
+	}
+
+	public void insert(Student student) {
+		em.persist(student);
+	}
+
+	public void delete(Student student) {
+		em.remove(student);
 	}
 
 	@Override
@@ -23,4 +45,10 @@ public class StudentDaoJpaImpl extends AbstractDaoJpaImpl<Student> implements St
 		}
 		return null;
 	}
+	@Override
+	public List<Student> getByGroup(StudentGroup studentGroup) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
