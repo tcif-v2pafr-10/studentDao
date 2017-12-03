@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import nl.hu.pafr.dao.StudentDao;
-import nl.hu.pafr.dao.memory.DataStore;
-import nl.hu.pafr.dao.memory.StudentDaoMemImpl;
+import nl.hu.pafr.dao.mysql.StudentDaoJdbcImpl;
 import nl.hu.pafr.model.Student;
 
 public class Main {
@@ -15,8 +14,7 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		DataStore dataStore = new DataStore();
-		StudentDao studentDao = new StudentDaoMemImpl(dataStore);
+		StudentDao studentDao = new StudentDaoJdbcImpl();
 		/*
 		 * Aanmaken van de domein objecten
 		 */
